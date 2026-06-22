@@ -1,0 +1,506 @@
+<!DOCTYPE html>
+<html lang="ru" data-theme="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Bekanews — Кино, Игры, Футбол</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <!-- ══════════ NAVBAR ══════════ -->
+  <header class="navbar" id="navbar">
+    <div class="navbar__inner">
+      <a href="#" class="navbar__logo">
+        <span class="logo-beka">Beka</span><span class="logo-news">news</span>
+        <span class="logo-live">LIVE</span>
+      </a>
+
+      <nav class="navbar__nav" id="mainNav">
+        <a href="#home"    class="nav-link active">Главная</a>
+        <a href="#movies"  class="nav-link">Фильмы</a>
+        <a href="#games"   class="nav-link">Игры</a>
+        <a href="#wc2026"  class="nav-link">ЧМ-2026</a>
+        <a href="#about"   class="nav-link">О сайте</a>
+      </nav>
+
+      <div class="navbar__actions">
+        <div class="search-wrap" id="searchWrap">
+          <input type="text" id="searchInput" class="search-input" placeholder="Поиск новостей…" aria-label="Поиск" />
+          <button class="search-btn" id="searchToggle" aria-label="Открыть поиск">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+          </button>
+        </div>
+        <button class="theme-toggle" id="themeToggle" aria-label="Сменить тему">
+          <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"/></svg>
+          <svg class="icon-sun"  viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+        </button>
+        <button class="burger" id="burger" aria-label="Меню">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </div>
+
+    <!-- search results dropdown -->
+    <div class="search-results" id="searchResults"></div>
+  </header>
+
+  <!-- ticker -->
+  <div class="ticker-wrap">
+    <span class="ticker-label">BREAKING</span>
+    <div class="ticker-track">
+      <span class="ticker-inner" id="tickerInner">
+        FIFA утвердила расписание ЧМ-2026 &nbsp;⚡&nbsp; Warner Bros. анонсировала новый блокбастер &nbsp;⚡&nbsp; A Minecraft Movie побила рекорды кассовых сборов &nbsp;⚡&nbsp; Аргентина готовится к защите чемпионского титула &nbsp;⚡&nbsp; Universal Pictures выпускает новый трейлер &nbsp;⚡&nbsp; Five Nights at Freddy's 2 официально подтверждён &nbsp;⚡&nbsp; ЧМ-2026: 48 команд, 3 страны, 1 трофей &nbsp;⚡&nbsp;
+      </span>
+    </div>
+  </div>
+
+  <main>
+
+    <!-- ══════════ HERO ══════════ -->
+    <section class="hero" id="home">
+      <div class="hero__bg">
+        <div class="hero__grid"></div>
+        <div class="hero__glow glow-1"></div>
+        <div class="hero__glow glow-2"></div>
+        <div class="hero__glow glow-3"></div>
+        <div class="hero__scanlines"></div>
+      </div>
+      <div class="hero__content">
+        <div class="hero__badge">
+          <span class="pulse-dot"></span> Новости в реальном времени
+        </div>
+        <h1 class="hero__title">
+          <span class="hero__title-line1">Bekanews</span>
+          <span class="hero__title-line2">Все главные новости<br>кино и спорта</span>
+        </h1>
+        <p class="hero__sub">Новости новых фильмов, экранизаций игр и чемпионата мира по футболу 2026 — всё в одном месте.</p>
+        <div class="hero__cta">
+          <a href="#movies" class="btn btn-primary">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="5,3 19,12 5,21"/></svg>
+            Смотреть новости
+          </a>
+          <a href="#wc2026" class="btn btn-ghost">ЧМ-2026 ↗</a>
+        </div>
+        <div class="hero__stats">
+          <div class="hero__stat"><strong id="cntMovies">0</strong><span>фильмов</span></div>
+          <div class="hero__stat-div"></div>
+          <div class="hero__stat"><strong id="cntGames">0</strong><span>игр</span></div>
+          <div class="hero__stat-div"></div>
+          <div class="hero__stat"><strong id="cntMatches">0</strong><span>матчей ЧМ</span></div>
+        </div>
+      </div>
+      <div class="hero__scroll-hint">
+        <div class="scroll-arrow"></div>
+      </div>
+    </section>
+
+    <!-- ══════════ MOVIES ══════════ -->
+    <section class="section" id="movies">
+      <div class="section__inner">
+        <div class="section__head reveal">
+          <div class="section__label">
+            <span class="label-bar"></span>Новые фильмы
+          </div>
+          <h2 class="section__title">Главные премьеры 2026</h2>
+        </div>
+        <div class="cards-grid" id="moviesGrid">
+
+          <article class="news-card reveal" data-search="universal мир юрского периода динозавры блокбастер">
+            <div class="news-card__img-wrap">
+              <div class="news-card__img" style="background:linear-gradient(135deg,#0c2340,#0ea5e9,#0369a1)">
+                <div class="fake-poster">
+                  <span class="fake-poster__studio">UNIVERSAL</span>
+                  <span class="fake-poster__title">Jurassic World<br>Rebirth</span>
+                  <span class="fake-poster__year">2026</span>
+                  <div class="fake-poster__deco">🦕</div>
+                </div>
+              </div>
+              <div class="news-card__badge badge-new">ТРЕЙЛЕР</div>
+              <div class="news-card__overlay"></div>
+            </div>
+            <div class="news-card__body">
+              <div class="news-card__meta"><span class="tag tag-movie">Фильм</span><time>10 янв 2026</time></div>
+              <h3>Jurassic World: Rebirth</h3>
+              <p>Universal Pictures перезапускает франшизу с новым кастом. Скарлетт Йоханссон возглавляет экспедицию на остров, где динозавры эволюционировали. Выход — 2 июля 2026.</p>
+              <button class="btn-more" onclick="openModal('jurassic')">Подробнее →</button>
+            </div>
+          </article>
+
+          <article class="news-card reveal" data-search="warner bros superman dc конор оcallaghan">
+            <div class="news-card__img-wrap">
+              <div class="news-card__img" style="background:linear-gradient(135deg,#1a0533,#7c3aed,#c026d3)">
+                <div class="fake-poster">
+                  <span class="fake-poster__studio">WARNER BROS</span>
+                  <span class="fake-poster__title">Superman</span>
+                  <span class="fake-poster__year">2025</span>
+                  <div class="fake-poster__deco">🦸</div>
+                </div>
+              </div>
+              <div class="news-card__badge badge-hot">ХИТЫ</div>
+              <div class="news-card__overlay"></div>
+            </div>
+            <div class="news-card__body">
+              <div class="news-card__meta"><span class="tag tag-movie">Фильм</span><time>11 июля 2025</time></div>
+              <h3>Superman (2025)</h3>
+              <p>Джеймс Ганн перезапустил DC: Дэвид Корренсвет в роли Кларка Кента. Фильм уже в прокате — критики восторженно приняли перезапуск вселенной.</p>
+              <button class="btn-more" onclick="openModal('superman')">Подробнее →</button>
+            </div>
+          </article>
+
+          <article class="news-card reveal" data-search="universal wicked волшебник оз мюзикл сиквел">
+            <div class="news-card__img-wrap">
+              <div class="news-card__img" style="background:linear-gradient(135deg,#052014,#16a34a,#65a30d)">
+                <div class="fake-poster">
+                  <span class="fake-poster__studio">UNIVERSAL</span>
+                  <span class="fake-poster__title">Wicked:<br>For Good</span>
+                  <span class="fake-poster__year">2025</span>
+                  <div class="fake-poster__deco">🧙‍♀️</div>
+                </div>
+              </div>
+              <div class="news-card__badge badge-new">СКОРО</div>
+              <div class="news-card__overlay"></div>
+            </div>
+            <div class="news-card__body">
+              <div class="news-card__meta"><span class="tag tag-movie">Мюзикл</span><time>22 нояб 2025</time></div>
+              <h3>Wicked: For Good</h3>
+              <p>Вторая часть эпичного мюзикла от Universal. Ариана Гранде и Синтия Эриво возвращаются. Завершение одной из самых ожидаемых дилогий десятилетия.</p>
+              <button class="btn-more" onclick="openModal('wicked')">Подробнее →</button>
+            </div>
+          </article>
+
+          <article class="news-card reveal" data-search="warner bros гарри поттер сериал HBO сезон">
+            <div class="news-card__img-wrap">
+              <div class="news-card__img" style="background:linear-gradient(135deg,#1c0f00,#b45309,#fbbf24)">
+                <div class="fake-poster">
+                  <span class="fake-poster__studio">HBO / WB</span>
+                  <span class="fake-poster__title">Harry Potter<br>Series</span>
+                  <span class="fake-poster__year">2026</span>
+                  <div class="fake-poster__deco">⚡</div>
+                </div>
+              </div>
+              <div class="news-card__badge badge-new">СЕРИАЛ</div>
+              <div class="news-card__overlay"></div>
+            </div>
+            <div class="news-card__body">
+              <div class="news-card__meta"><span class="tag tag-series">Сериал</span><time>15 дек 2025</time></div>
+              <h3>Гарри Поттер: сериал HBO</h3>
+              <p>Warner Bros. и HBO Max запускают масштабную адаптацию всех семи книг. Кастинг завершён, съёмки идут. Дебют ожидается в 2026 году.</p>
+              <button class="btn-more" onclick="openModal('harry')">Подробнее →</button>
+            </div>
+          </article>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ══════════ GAMES MOVIES ══════════ -->
+    <section class="section section-dark" id="games">
+      <div class="section__inner">
+        <div class="section__head reveal">
+          <div class="section__label">
+            <span class="label-bar"></span>Фильмы по играм
+          </div>
+          <h2 class="section__title">Игры на большом экране</h2>
+        </div>
+        <div class="games-grid" id="gamesGrid">
+
+          <article class="game-card reveal" data-search="mario nintendo братья грибное королевство мультфильм">
+            <div class="game-card__art" style="--c1:#dc2626;--c2:#fbbf24">
+              <div class="game-card__art-inner">
+                <div class="game-icon">🍄</div>
+                <span class="game-card__franchise">Nintendo</span>
+              </div>
+            </div>
+            <div class="game-card__body">
+              <div class="game-card__meta">
+                <span class="tag tag-animated">Анимация</span>
+                <div class="game-rating">⭐ 7.0</div>
+              </div>
+              <h3>The Super Mario Bros. Movie</h3>
+              <p class="game-card__year">2023 · Illumination</p>
+              <p>Братья-сантехники попадают в Грибное королевство. Фильм собрал 1.36 млрд $ в мировом прокате, став одним из самых кассовых анимационных фильмов.</p>
+              <div class="game-card__tags">
+                <span class="tag-pill">$1.36 млрд</span>
+                <span class="tag-pill">Сиквел в разработке</span>
+              </div>
+              <button class="btn-more" onclick="openModal('mario')">Подробнее →</button>
+            </div>
+          </article>
+
+          <article class="game-card reveal" data-search="майнкрафт minecraft фильм кубики приключение">
+            <div class="game-card__art" style="--c1:#16a34a;--c2:#65a30d">
+              <div class="game-card__art-inner">
+                <div class="game-icon">🧱</div>
+                <span class="game-card__franchise">Microsoft</span>
+              </div>
+            </div>
+            <div class="game-card__body">
+              <div class="game-card__meta">
+                <span class="tag tag-live">Игровой</span>
+                <div class="game-rating">⭐ 6.2</div>
+              </div>
+              <h3>A Minecraft Movie</h3>
+              <p class="game-card__year">2025 · Warner Bros.</p>
+              <p>Живой мир кубов ожил на экране. Фильм с Джейком Блэком уже побил несколько рекордов первого уик-энда и стал феноменом в социальных сетях.</p>
+              <div class="game-card__tags">
+                <span class="tag-pill">Рекорд вик-энда</span>
+                <span class="tag-pill">Вирусный хит</span>
+              </div>
+              <button class="btn-more" onclick="openModal('minecraft')">Подробнее →</button>
+            </div>
+          </article>
+
+          <article class="game-card reveal" data-search="five nights freddy фредди хоррор аниматроники">
+            <div class="game-card__art" style="--c1:#7c2d12;--c2:#c2410c">
+              <div class="game-card__art-inner">
+                <div class="game-icon">🐻</div>
+                <span class="game-card__franchise">Blumhouse</span>
+              </div>
+            </div>
+            <div class="game-card__body">
+              <div class="game-card__meta">
+                <span class="tag tag-horror">Хоррор</span>
+                <div class="game-rating">⭐ 5.8</div>
+              </div>
+              <h3>Five Nights at Freddy's</h3>
+              <p class="game-card__year">2023 · Universal</p>
+              <p>Культовый хоррор перекочевал в кино. Сиквел официально подтверждён после того, как первый фильм окупился в 10 раз. Выход FNAF 2 — 2025.</p>
+              <div class="game-card__tags">
+                <span class="tag-pill">FNAF 2 подтверждён</span>
+                <span class="tag-pill">$297 млн</span>
+              </div>
+              <button class="btn-more" onclick="openModal('fnaf')">Подробнее →</button>
+            </div>
+          </article>
+
+          <article class="game-card reveal" data-search="будущие фильмы игры bioshock mass effect">
+            <div class="game-card__art" style="--c1:#1e3a5f;--c2:#0ea5e9">
+              <div class="game-card__art-inner">
+                <div class="game-icon">🎮</div>
+                <span class="game-card__franchise">В разработке</span>
+              </div>
+            </div>
+            <div class="game-card__body">
+              <div class="game-card__meta">
+                <span class="tag tag-future">Скоро</span>
+                <div class="game-rating">🔥 Ожидаем</div>
+              </div>
+              <h3>Будущие экранизации</h3>
+              <p class="game-card__year">2026–2027</p>
+              <p>BioShock (Netflix), Mass Effect (Amazon), Hollow Knight (анонс), God of War (Amazon). Золотая эпоха адаптаций видеоигр только началась.</p>
+              <div class="game-card__tags">
+                <span class="tag-pill">BioShock</span>
+                <span class="tag-pill">Mass Effect</span>
+                <span class="tag-pill">God of War</span>
+              </div>
+              <button class="btn-more" onclick="openModal('future')">Подробнее →</button>
+            </div>
+          </article>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ══════════ WC 2026 ══════════ -->
+    <section class="section" id="wc2026">
+      <div class="section__inner">
+        <div class="section__head reveal">
+          <div class="section__label">
+            <span class="label-bar"></span>ЧМ-2026
+          </div>
+          <h2 class="section__title">FIFA World Cup 2026</h2>
+          <p class="section__desc reveal">США · Канада · Мексика — 48 сборных, 16 стадионов, один трофей.</p>
+        </div>
+
+        <!-- facts strip -->
+        <div class="wc-facts reveal">
+          <div class="wc-fact">
+            <span class="wc-fact__num">48</span>
+            <span class="wc-fact__label">Сборных</span>
+          </div>
+          <div class="wc-fact">
+            <span class="wc-fact__num">16</span>
+            <span class="wc-fact__label">Стадионов</span>
+          </div>
+          <div class="wc-fact">
+            <span class="wc-fact__num">104</span>
+            <span class="wc-fact__label">Матча</span>
+          </div>
+          <div class="wc-fact">
+            <span class="wc-fact__num">3</span>
+            <span class="wc-fact__label">Страны</span>
+          </div>
+        </div>
+
+        <!-- matches -->
+        <h3 class="subsection-title reveal">Ключевые матчи</h3>
+        <div class="matches-list reveal">
+          <div class="match-row">
+            <div class="match-team match-team--home"><span class="flag">🇧🇷</span><span>Бразилия</span></div>
+            <div class="match-score"><span class="match-date">12 июн</span><span class="vs">VS</span></div>
+            <div class="match-team match-team--away"><span>Германия</span><span class="flag">🇩🇪</span></div>
+          </div>
+          <div class="match-row">
+            <div class="match-team match-team--home"><span class="flag">🇦🇷</span><span>Аргентина</span></div>
+            <div class="match-score"><span class="match-date">15 июн</span><span class="vs">VS</span></div>
+            <div class="match-team match-team--away"><span>Франция</span><span class="flag">🇫🇷</span></div>
+          </div>
+          <div class="match-row">
+            <div class="match-team match-team--home"><span class="flag">🇪🇸</span><span>Испания</span></div>
+            <div class="match-score"><span class="match-date">18 июн</span><span class="vs">VS</span></div>
+            <div class="match-team match-team--away"><span>Португалия</span><span class="flag">🇵🇹</span></div>
+          </div>
+          <div class="match-row final">
+            <div class="match-team match-team--home"><span class="flag">🏆</span><span>Финал</span></div>
+            <div class="match-score"><span class="match-date">19 июл</span><span class="vs">VS</span></div>
+            <div class="match-team match-team--away"><span>MetLife</span><span class="flag">🏟</span></div>
+          </div>
+        </div>
+
+        <!-- players -->
+        <h3 class="subsection-title reveal">Звёзды турнира</h3>
+        <div class="players-grid reveal">
+          <div class="player-card">
+            <div class="player-avatar" style="background:linear-gradient(135deg,#1d4ed8,#3b82f6)">🇦🇷</div>
+            <div class="player-info">
+              <strong>Лионель Месси</strong>
+              <span>Аргентина · Форвард</span>
+              <div class="player-stat">Действующий чемпион</div>
+            </div>
+          </div>
+          <div class="player-card">
+            <div class="player-avatar" style="background:linear-gradient(135deg,#dc2626,#f97316)">🇵🇹</div>
+            <div class="player-info">
+              <strong>Криштиану Роналду</strong>
+              <span>Португалия · Форвард</span>
+              <div class="player-stat">Рекордсмен по голам</div>
+            </div>
+          </div>
+          <div class="player-card">
+            <div class="player-avatar" style="background:linear-gradient(135deg,#1e40af,#7c3aed)">🇫🇷</div>
+            <div class="player-info">
+              <strong>Килиан Мбаппе</strong>
+              <span>Франция · Форвард</span>
+              <div class="player-stat">Главный фаворит</div>
+            </div>
+          </div>
+          <div class="player-card">
+            <div class="player-avatar" style="background:linear-gradient(135deg,#065f46,#059669)">🇧🇷</div>
+            <div class="player-info">
+              <strong>Виниcius Jr.</strong>
+              <span>Бразилия · Вингер</span>
+              <div class="player-stat">Лучший дриблёр</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- news -->
+        <h3 class="subsection-title reveal">Последние новости ЧМ</h3>
+        <div class="wc-news-list reveal">
+          <div class="wc-news-item">
+            <span class="wc-news-dot"></span>
+            <div>
+              <strong>FIFA объявила стадионы финального этапа</strong>
+              <p>MetLife Stadium в Нью-Джерси примет финал 19 июля. Вместимость — 82 500 человек.</p>
+              <time>8 янв 2026</time>
+            </div>
+          </div>
+          <div class="wc-news-item">
+            <span class="wc-news-dot"></span>
+            <div>
+              <strong>Новый формат: 12 групп по 4 команды</strong>
+              <p>Из каждой группы выходят 2 команды + 8 лучших третьих мест — итого 32 в плей-офф.</p>
+              <time>15 дек 2025</time>
+            </div>
+          </div>
+          <div class="wc-news-item">
+            <span class="wc-news-dot"></span>
+            <div>
+              <strong>Semi-automated offside technology</strong>
+              <p>ЧМ-2026 станет самым технологичным в истории: ИИ-система определения офсайда в реальном времени.</p>
+              <time>2 дек 2025</time>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ══════════ ABOUT ══════════ -->
+    <section class="section section-dark" id="about">
+      <div class="section__inner">
+        <div class="section__head reveal">
+          <div class="section__label"><span class="label-bar"></span>О сайте</div>
+          <h2 class="section__title">Что такое Bekanews?</h2>
+        </div>
+        <div class="about-grid reveal">
+          <div class="about-card">
+            <div class="about-icon">🎬</div>
+            <h3>Кино</h3>
+            <p>Свежие трейлеры, даты выхода и рецензии на главные блокбастеры от Universal, Warner Bros. и других студий.</p>
+          </div>
+          <div class="about-card">
+            <div class="about-icon">🎮</div>
+            <h3>Игры</h3>
+            <p>Новости экранизаций: от Mario до BioShock. Следим за всеми адаптациями любимых франшиз.</p>
+          </div>
+          <div class="about-card">
+            <div class="about-icon">⚽</div>
+            <h3>Футбол</h3>
+            <p>Всё о Чемпионате мира 2026: расписание, звёзды, интриги и экспертные прогнозы.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ══════════ FOOTER ══════════ -->
+  <footer class="footer">
+    <div class="footer__inner">
+      <div class="footer__brand">
+        <a href="#" class="navbar__logo">
+          <span class="logo-beka">Beka</span><span class="logo-news">news</span>
+        </a>
+        <p>Все новости кино, игр и футбола в одном месте.</p>
+      </div>
+      <div class="footer__links">
+        <div class="footer__col">
+          <h4>Разделы</h4>
+          <a href="#movies">Фильмы</a>
+          <a href="#games">Игры</a>
+          <a href="#wc2026">ЧМ-2026</a>
+        </div>
+        <div class="footer__col">
+          <h4>О нас</h4>
+          <a href="#about">О сайте</a>
+          <a href="#">Контакты</a>
+        </div>
+      </div>
+    </div>
+    <div class="footer__bottom">
+      <p>Bekanews © 2026 &nbsp;·&nbsp; Все новости кино, игр и футбола в одном месте.</p>
+    </div>
+    <div class="footer__signature reveal">
+      <div class="footer__sig-glow"></div>
+      <div class="footer__sig-content">
+        <span class="footer__sig-bar"></span>
+        <p class="footer__sig-main">Сайт создан <span class="footer__sig-name">Шайдуллаевым</span></p>
+        <span class="footer__sig-bar"></span>
+      </div>
+      <p class="footer__sig-copy">Bekanews © 2026. Все права защищены.</p>
+    </div>
+  </footer>
+
+  <!-- ══════════ MODAL ══════════ -->
+  <div class="modal-overlay" id="modalOverlay">
+    <div class="modal" id="modal" role="dialog" aria-modal="true">
+      <button class="modal__close" id="modalClose" aria-label="Закрыть">✕</button>
+      <div class="modal__body" id="modalBody"></div>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
